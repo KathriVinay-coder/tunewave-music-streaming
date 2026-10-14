@@ -1,0 +1,127 @@
+/* Search View & Browse Categories */
+
+#search-view {
+  display: none;
+  padding-bottom: 2rem;
+}
+
+/* Search Input Box */
+.search-header {
+  position: sticky;
+  top: 0;
+  background-color: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 1rem 0;
+  z-index: 20;
+}
+
+.search-bar-box {
+  display: flex;
+  align-items: center;
+  background-color: #242424;
+  border-radius: 500px;
+  padding: 0.75rem 1.25rem;
+  width: 100%;
+  max-width: 480px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.search-bar-box:focus-within {
+  border-color: #fff;
+  background-color: #2a2a2a;
+}
+
+.search-bar-box i {
+  color: #b3b3b3;
+  margin-right: 0.85rem;
+  font-size: 1.1rem;
+}
+
+.search-bar-box input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+}
+
+.search-bar-box input::placeholder {
+  color: #757575;
+}
+
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  cursor: pointer;
+  padding: 4px 6px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, transform 0.15s;
+}
+
+.search-clear-btn:hover {
+  color: #fff;
+  transform: scale(1.15);
+}
+
+/* Browse All Genre Cards Grid */
+.genre-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.genre-card {
+  height: 160px;
+  border-radius: 8px;
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  user-select: none;
+}
+
+.genre-card:hover {
+  transform: scale(1.03);
+  filter: brightness(1.1);
+}
+
+.genre-card span {
+  display: block;
+}
+
+.genre-card i {
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  font-size: 5rem;
+  opacity: 0.2;
+  transform: rotate(20deg);
+}
+
+/* Vibrant Spotify Browse Colors */
+.bg-pop { background-color: #8c1932; }
+.bg-hiphop { background-color: #bc5900; }
+.bg-rock { background-color: #e91429; }
+.bg-bollywood { background-color: #b02897; }
+.bg-dance { background-color: #0d73ec; }
+.bg-chill { background-color: #1e3264; }
+.bg-indie { background-color: #477d95; }
+.bg-podcasts { background-color: #006450; }
+
+/* Empty Search Message */
+.search-empty-msg {
+  color: #b3b3b3;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}

@@ -1,0 +1,44 @@
+/* Base and Reset Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* Main Layout */
+.main {
+  display: flex;
+  height: calc(100vh - 72px);
+  padding: 0.5rem;
+  gap: 0.5rem;
+}

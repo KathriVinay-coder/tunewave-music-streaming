@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Web Player: Music for everyone</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" href="logo.png"/>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main">
+        <!-- Sidebar -->
+        <div class="side_bar">
+            <div class="nav">
+                <div class="nav-option active-nav" id="nav-home-btn">
+                    <i class="fa-solid fa-house" id="home_icon"></i>
+                    <a href="#">Home</a>
+                </div>
+                <div class="nav-option" id="nav-search-btn">
+                    <i class="fa-solid fa-magnifying-glass" id="search_icon"></i>
+                    <a href="#">Search</a>
+                </div>
+            </div>
+
+            <div class="your_library">
+                <div class="options">
+                    <div class="lib-options nav-option">
+                        <img src="library_icon.png" id="lib" alt="Library"/>
+                        <a href="#">Your Library</a>
+                    </div>
+                    <div class="icons">
+                        <i class="fa-solid fa-plus" id="add-song-icon-btn" title="Add song to playlist" onclick="openAddSongModal()"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div class="lib-box">
+                    <div class="box">
+                        <p class="box-p1">Add your favorite music</p>
+                        <p class="box-p2">Upload MP3 or paste link with custom cover</p>
+                        <button class="badge" id="open-add-song-btn" onclick="openAddSongModal()"><i class="fa-solid fa-plus" style="margin-right: 4px;"></i>Add Song</button>
+                    </div>
+                    <div class="box">
+                        <p class="box-p1">Let's find some podcasts to follow</p>
+                        <p class="box-p2">We'll keep you updated on new episodes</p>
+                        <button class="badge" id="browse-podcasts-btn">Browse podcasts</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main_content">
+            <!-- Sticky Navigation Bar -->
+            <div class="sticky-nav">
+                <div class="sticky-nav-icons">
+                    <img src="backward_icon.png" alt="Back" id="nav-back-arrow">
+                    <img src="forward_icon.png" class="hide" alt="Forward" id="nav-forward-arrow">
+                </div>
+                <div class="sticky-nav-options">
+                    <button class="badge nav-item add-song-nav-badge" id="add-song-nav-btn" onclick="openAddSongModal()"><i class="fa-solid fa-circle-plus"></i> Add Song</button>
+                    <!-- User Authentication Section (Log in / Sign up OR Logged in Profile) -->
+                    <div id="user-auth-section" class="user-auth-section">
+                        <a href="signup.html" class="nav-auth-link signup-link">Sign up</a>
+                        <a href="signin.html" class="login-badge">Log in</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 1: HOME VIEW -->
+            <div id="home-view">
+                <!-- Recently Played Section -->
+                <div class="section-header">
+                    <h2>Recently Played</h2>
+                    <button class="add-to-section-btn" data-category="Recently Played" onclick="openAddSongModal('Recently Played')" title="Add song to Recently Played">
+                        <i class="fa-solid fa-plus"></i> Add Song
+                    </button>
+                </div>
+                <div class="card-container" id="recently-played-container"></div>
+
+                <!-- Trending Section -->
+                <div class="section-header">
+                    <h2>Trending now near you</h2>
+                    <button class="add-to-section-btn" data-category="Trending now near you" onclick="openAddSongModal('Trending now near you')" title="Add song to Trending">
+                        <i class="fa-solid fa-plus"></i> Add Song
+                    </button>
+                </div>
+                <div class="card-container" id="trending-container"></div>
+
+                <!-- Featured Charts Section -->
+                <div class="section-header">
+                    <h2>Featured Charts</h2>
+                    <button class="add-to-section-btn" data-category="Featured Charts" onclick="openAddSongModal('Featured Charts')" title="Add song to Featured Charts">
+                        <i class="fa-solid fa-plus"></i> Add Song
+                    </button>
+                </div>
+                <div class="card-container" id="featured-container"></div>  
+            </div>
+
+            <!-- VIEW 2: SEARCH VIEW -->
+            <div id="search-view">
+                <!-- Search Input Bar -->
+                <div class="search-header">
+                    <div class="search-bar-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search-input" placeholder="What do you want to play?" autocomplete="off">
+                        <button type="button" id="search-clear-btn" class="search-clear-btn" title="Clear search" style="display: none;">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Search Results (Populated when user types) -->
+                <div id="search-results-section" style="display: none;">
+                    <h2>Search Results</h2>
+                    <div class="card-container" id="search-results-container"></div>
+                    <p id="search-no-results" class="search-empty-msg" style="display: none;">No matching songs found. Try a different title or artist.</p>
+                </div>
+
+                <!-- Browse All Genre Categories (Shown when search bar is empty) -->
+                <div id="browse-all-section">
+                    <h2>Browse all</h2>
+                    <div class="genre-container">
+                        <div class="genre-card bg-pop" data-genre="pop">
+                            <span>Pop</span>
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                        <div class="genre-card bg-bollywood" data-genre="bollywood">
+                            <span>Bollywood</span>
+                            <i class="fa-solid fa-compact-disc"></i>
+                        </div>
+                        <div class="genre-card bg-hiphop" data-genre="hiphop">
+                            <span>Hip-Hop</span>
+                            <i class="fa-solid fa-headphones"></i>
+                        </div>
+                        <div class="genre-card bg-rock" data-genre="rock">
+                            <span>Rock</span>
+                            <i class="fa-solid fa-guitar"></i>
+                        </div>
+                        <div class="genre-card bg-dance" data-genre="dance">
+                            <span>Dance / Electronic</span>
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div class="genre-card bg-chill" data-genre="chill">
+                            <span>Chill & Lo-Fi</span>
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <div class="genre-card bg-indie" data-genre="indie">
+                            <span>Indie</span>
+                            <i class="fa-solid fa-radio"></i>
+                        </div>
+                        <div class="genre-card bg-podcasts" data-genre="podcasts">
+                            <span>Podcasts</span>
+                            <i class="fa-solid fa-microphone-lines"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="line"></div>
+            </div>                      
+        </div>
+
+        <!-- Music Player Bar (Bottom) -->
+        <div class="music_player">
+            <!-- Album info (Left) -->
+            <div class="album">
+                <img src="card1img.jpeg" class="album-img" id="current-album-img" alt="Album Cover">
+                <div class="album-details">
+                    <p class="album-title" id="current-album-title">Daylight</p>
+                    <p class="album-artist" id="current-album-artist">David Kushner</p>
+                </div>
+                <div class="album-icons">
+                    <i class="fa-regular fa-heart album-icon" id="album-like-btn" title="Save to Your Library"></i>
+                    <i class="fa-solid fa-clone album-icon" id="album-pip-btn" title="Picture in picture"></i>
+                </div>
+            </div>
+
+            <!-- Controls and Seekbar (Center) -->
+            <div class="player">
+                <div class="player-control">
+                    <img src="player_icon1.png" class="player-control-icon" id="shuffle-btn" title="Shuffle" alt="Shuffle">
+                    <img src="player_icon2.png" class="player-control-icon" id="prev-btn" title="Previous" alt="Previous">
+                    <button class="master-play-circle" id="master-play-btn" title="Play" aria-label="Play / Pause">
+                        <i class="fa-solid fa-play master-icon" id="master-play-icon"></i>
+                    </button>
+                    <img src="player_icon4.png" class="player-control-icon" id="next-btn" title="Next" alt="Next">
+                    <img src="player_icon5.png" class="player-control-icon" id="loop-btn" title="Repeat" alt="Repeat">
+                </div>
+                <div class="playback-bar">
+                    <span class="curr-time" id="curr-time">0:00</span>
+                    <input type="range" min="0" max="100" value="0" class="progress-bar" id="progress-bar">
+                    <span class="tot-time" id="tot-time">3:33</span>
+                </div>
+            </div>
+
+            <!-- Additional Controls (Right) -->
+            <div class="controls">
+                <i class="fa-solid fa-microphone control-icon" title="Lyrics"></i>
+                <i class="fa-solid fa-bars-staggered control-icon" title="Queue"></i>
+                <i class="fa-solid fa-laptop-code control-icon" title="Devices"></i>
+                <div class="volume-container">
+                    <i class="fa-solid fa-volume-high control-icon" id="volume-icon" title="Volume"></i>
+                    <input type="range" min="0" max="100" value="80" class="progress-bar volume-bar" id="volume-bar">
+                </div>
+                <i class="fa-solid fa-expand control-icon" title="Full screen"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- OWNER ADD SONG MODAL -->
+    <div id="add-song-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Add Song to Playlist</h3>
+                <button type="button" id="modal-close-btn" class="modal-close-btn" onclick="closeAddSongModal()">&times;</button>
+            </div>
+            <form id="add-song-form" onsubmit="handleAddSongSubmit(event)">
+                <div class="modal-form-group">
+                    <label for="new-song-title">Song Title</label>
+                    <input type="text" id="new-song-title" placeholder="e.g. Blinding Lights (default: My Track)">
+                </div>
+                <div class="modal-form-group">
+                    <label for="new-song-artist">Artist Name</label>
+                    <input type="text" id="new-song-artist" placeholder="e.g. The Weeknd (default: Spotify Artist)">
+                </div>
+                <div class="modal-form-group">
+                    <label for="new-song-category">Category</label>
+                    <select id="new-song-category">
+                        <option value="Recently Played">Recently Played</option>
+                        <option value="Trending now near you" selected>Trending now near you</option>
+                        <option value="Featured Charts">Featured Charts</option>
+                    </select>
+                </div>
+                <div class="modal-form-group">
+                    <label>Cover Picture (Upload Image, Choose Preset, or Paste URL)</label>
+                    <div class="image-input-container">
+                        <div class="image-preview-box">
+                            <img id="image-preview-img" src="card1img.jpeg" alt="Cover Preview" onerror="this.src='card1img.jpeg'">
+                        </div>
+                        <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <input type="text" id="new-song-image" placeholder="Image URL (https://...) or choose below" value="card1img.jpeg" autocomplete="off">
+                            <div style="display: flex; align-items: center; gap: 0.65rem;">
+                                <label for="new-song-image-file" class="modal-upload-btn" title="Choose picture from your computer">
+                                    <i class="fa-solid fa-camera"></i> Upload Image File
+                                </label>
+                                <input type="file" id="new-song-image-file" accept="image/*" style="display: none;">
+                                <span id="uploaded-image-name" class="uploaded-filename">Default: Card 1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <label style="font-size: 0.75rem; color: #a7a7a7; margin-top: 0.65rem; margin-bottom: 0.25rem;">Or click a preset album cover:</label>
+                    <div class="preset-pills-row" id="image-preset-pills">
+                        <span class="preset-pill active" data-img="card1img.jpeg">Card 1</span>
+                        <span class="preset-pill" data-img="card2img.jpeg">Card 2</span>
+                        <span class="preset-pill" data-img="card3img.jpeg">Card 3</span>
+                        <span class="preset-pill" data-img="card4img.jpeg">Card 4</span>
+                        <span class="preset-pill" data-img="card5img.jpeg">Card 5</span>
+                        <span class="preset-pill" data-img="card6img.jpeg">Card 6</span>
+                    </div>
+                </div>
+                <div class="modal-form-group">
+                    <label>Audio Source (Upload MP3 or Paste Link)</label>
+                    <div style="display: flex; gap: 0.65rem; align-items: center; margin-bottom: 0.5rem;">
+                        <label for="new-song-file" class="modal-upload-btn" title="Upload MP3 file from your computer">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Upload MP3 File
+                        </label>
+                        <input type="file" id="new-song-file" accept="audio/*,.mp3,.wav,.ogg,.m4a" style="display: none;">
+                        <span id="uploaded-file-name" class="uploaded-filename">Sample audio ready</span>
+                    </div>
+                    <label for="new-song-src" style="font-size: 0.75rem; color: #a7a7a7; margin-top: 0.25rem;">Or direct audio URL / file path:</label>
+                    <input type="text" id="new-song-src" placeholder="e.g. songs/my-song.mp3 or https://..." value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3">
+                </div>
+                <div class="modal-form-group">
+                    <label for="new-song-duration">Duration (MM:SS)</label>
+                    <input type="text" id="new-song-duration" placeholder="e.g. 3:45" value="3:30">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="modal-cancel-btn" class="modal-cancel-btn" onclick="closeAddSongModal()">Cancel</button>
+                    <button type="submit" id="modal-submit-btn" class="modal-save-btn">Add Song</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- OWNER DELETE SONG CONFIRMATION MODAL -->
+    <div id="delete-song-modal" class="modal-overlay">
+        <div class="modal-box" style="max-width: 400px; text-align: center;">
+            <div style="font-size: 2.5rem; color: #e22134; margin-bottom: 0.75rem;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 style="margin-bottom: 0.5rem;">Delete Song?</h3>
+            <p id="delete-song-confirm-text" style="color: #b3b3b3; font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.4;">
+                Are you sure you want to remove this song from the playlist?
+            </p>
+            <div class="modal-actions" style="justify-content: center; gap: 1rem;">
+                <button type="button" id="delete-cancel-btn" class="modal-cancel-btn">Cancel</button>
+                <button type="button" id="delete-confirm-btn" class="modal-save-btn" style="background-color: #e22134; color: #fff;">Delete</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/tracks.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

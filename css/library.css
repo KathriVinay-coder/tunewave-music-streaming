@@ -1,0 +1,277 @@
+/* Your Library View and Sidebar Items Styling */
+
+/* Sidebar Library Items */
+.lib-filters {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  padding: 0 0.25rem;
+}
+
+.lib-filter-pill {
+  background-color: #242424;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.lib-filter-pill:hover,
+.lib-filter-pill.active {
+  background-color: #fff;
+  color: #000;
+}
+
+.lib-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.lib-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.lib-item:hover,
+.lib-item.active-lib-item {
+  background-color: #242424;
+}
+
+.lib-item-heart {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #450af5, #8e8ee5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.lib-item-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.lib-item-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.lib-item-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lib-item-sub {
+  font-size: 0.75rem;
+  color: #a7a7a7;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   MAIN CONTENT: LIBRARY VIEW (#library-view)
+   ========================================================================== */
+#library-view {
+  display: none;
+  padding-bottom: 2rem;
+}
+
+/* Liked Songs Hero Banner */
+.library-hero {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(180deg, rgba(80, 56, 160, 0.6) 0%, rgba(18, 18, 18, 0) 100%);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.library-hero-art {
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #450af5, #8e8ee5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 4rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
+}
+
+.library-hero-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.library-hero-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.library-hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin: 0.25rem 0 0.5rem 0;
+  letter-spacing: -1px;
+}
+
+.library-hero-meta {
+  font-size: 0.88rem;
+  color: #b3b3b3;
+}
+
+/* Library Play All Button Bar */
+.library-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.library-play-all-btn {
+  background-color: #1ed760;
+  border: none;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.15s, background-color 0.2s;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.library-play-all-btn:hover {
+  transform: scale(1.06);
+  background-color: #1fdf64;
+}
+
+/* Library Table List */
+.library-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.library-table th {
+  text-align: left;
+  color: #b3b3b3;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+}
+
+.library-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 4px;
+}
+
+.library-row:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.library-row.active-row {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.library-row.active-row .library-track-title {
+  color: #1ed760;
+}
+
+.library-row td {
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+}
+
+.library-track-main {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.library-track-thumb {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.library-track-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.library-track-title {
+  font-weight: 600;
+  margin: 0 0 2px 0;
+  color: #fff;
+}
+
+.library-track-artist {
+  font-size: 0.78rem;
+  color: #a7a7a7;
+  margin: 0;
+}
+
+.library-remove-btn {
+  background: transparent;
+  border: none;
+  color: #1ed760;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s, color 0.2s;
+}
+
+.library-remove-btn:hover {
+  color: #e22134;
+  transform: scale(1.15);
+}
+
+.library-empty-box {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #b3b3b3;
+}
+
+.library-empty-box i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #727272;
+}

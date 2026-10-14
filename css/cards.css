@@ -1,0 +1,171 @@
+/* Cards Grid and Card Styles */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: #181818;
+  width: 175px;
+  border-radius: 0.5rem;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.card:hover {
+  background-color: #282828;
+  transform: translateY(-4px);
+}
+
+/* Active playing card */
+.card.active-card {
+  background-color: #242424;
+  outline: 1px solid rgba(30, 215, 96, 0.4);
+}
+
+.card.active-card .card-title {
+  color: #1ed760;
+}
+
+.card-img-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.card-img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 0.35rem;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
+/* Floating green play button on hover */
+.card-play-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #1ed760;
+  border: none;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.2s;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.card:hover .card-play-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-play-btn:hover {
+  background-color: #1fdf64;
+  transform: scale(1.08) !important;
+}
+
+/* Owner Delete button on card */
+.card-delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #b3b3b3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s, color 0.2s;
+  cursor: pointer;
+  z-index: 6;
+}
+
+.card:hover .card-delete-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-delete-btn:hover {
+  background-color: #e22134;
+  color: #fff;
+  border-color: #e22134;
+  transform: scale(1.12);
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0 0 0.4rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-info {
+  font-size: 0.78rem;
+  color: #a7a7a7;
+  margin: 0;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card highlighted upon being added */
+.card.just-added {
+  box-shadow: 0 0 0 2px #1ed760, 0 8px 24px rgba(30, 215, 96, 0.45) !important;
+  transform: scale(1.04);
+  transition: all 0.4s ease;
+}
+
+/* Smooth pop-in when a track joins Recently Played */
+#recently-played-container .card:first-child {
+  animation: recentlyPlayedAppear 0.35s ease-out;
+}
+
+@keyframes recentlyPlayedAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+/* Footer divider */
+.footer {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.line {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+

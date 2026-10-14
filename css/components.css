@@ -1,0 +1,58 @@
+/* Notification Toast & Responsive Media Queries */
+
+/* Notification toast */
+#spotify-toast {
+  visibility: hidden;
+  min-width: 220px;
+  background-color: #1ed760;
+  color: #000;
+  text-align: center;
+  border-radius: 50px;
+  padding: 10px 22px;
+  position: fixed;
+  z-index: 9999;
+  bottom: 86px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.25s, visibility 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+
+#spotify-toast.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-6px);
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 1000px) {
+  .hide {
+    display: none !important;
+  }
+  .side_bar {
+    width: 260px;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  .side_bar {
+    display: none;
+  }
+  .music_player {
+    padding: 0 0.5rem;
+  }
+  .controls {
+    display: none;
+  }
+  .album {
+    width: 45%;
+  }
+  .player {
+    width: 55%;
+  }
+}

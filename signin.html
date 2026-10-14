@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in - Spotify</title>
+    <link rel="icon" href="logo.png"/>
+    <link rel="stylesheet" href="css/auth.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-header">
+        <a href="index.html">
+            <img src="logo.png" alt="Spotify Logo" class="auth-logo">
+        </a>
+    </div>
+
+    <div class="auth-card">
+        <h1 class="auth-title">Log in to Spotify</h1>
+
+        <!-- Status / Error message alert box -->
+        <div id="auth-alert" class="auth-alert"></div>
+
+        <!-- Role Selection Tabs -->
+        <div class="role-tabs">
+            <button type="button" id="tab-viewer" class="role-tab-btn active-viewer">
+                <i class="fa-solid fa-headphones"></i> Viewer (Listener)
+            </button>
+            <button type="button" id="tab-owner" class="role-tab-btn">
+                <i class="fa-solid fa-crown"></i> Playlist Owner
+            </button>
+        </div>
+
+        <form id="signin-form">
+            <div class="form-group">
+                <label for="email" id="email-label">Viewer Email address</label>
+                <input type="email" id="email" name="email" placeholder="name@domain.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required autocomplete="current-password">
+                <div style="text-align: right; margin-top: 0.4rem;">
+                    <a href="#" id="form-forgot-password-link" class="forgot-link">Forgot password?</a>
+                </div>
+            </div>
+
+            <button type="submit" id="submit-btn" class="auth-btn">Log In as Viewer</button>
+        </form>
+
+        <div class="auth-divider"></div>
+
+        <div class="auth-footer">
+            <span>Don't have an account?</span>
+            <a href="signup.html">Sign up for Spotify</a>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Web Player
+    </a>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button type="button" id="close-forgot-modal" class="modal-close-icon">&times;</button>
+            
+            <div style="text-align: center; margin-bottom: 1.25rem;">
+                <div style="font-size: 2.25rem; color: #1ed760; margin-bottom: 0.5rem;"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <h2 style="font-size: 1.4rem; font-weight: 700; margin: 0 0 0.5rem 0;">Reset Your Password</h2>
+                <p style="font-size: 0.88rem; color: #b3b3b3; margin: 0;">Enter your account email. We'll send a password reset verification link to that address.</p>
+            </div>
+
+            <div id="forgot-modal-alert" class="auth-alert"></div>
+
+            <!-- Step 1: Request Code -->
+            <form id="forgot-request-form">
+                <div class="form-group">
+                    <label for="forgot-email">Email Address</label>
+                    <input type="email" id="forgot-email" placeholder="Enter your email" required>
+                </div>
+                <button type="submit" id="send-reset-btn" class="auth-btn">Send Email to My Address</button>
+            </form>
+
+            <!-- Step 2: Verify & Enter New Password (shown after email is sent) -->
+            <form id="forgot-verify-form" style="display: none; margin-top: 1rem;">
+                <div class="form-group">
+                    <label for="reset-code">Verification Code (sent to your email)</label>
+                    <input type="text" id="reset-code" class="code-input" placeholder="6-digit code" required>
+                </div>
+                <div class="form-group">
+                    <label for="reset-new-password">New Password</label>
+                    <input type="password" id="reset-new-password" placeholder="At least 6 characters" required>
+                </div>
+                <button type="submit" id="reset-password-btn" class="auth-btn">Save New Password</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
